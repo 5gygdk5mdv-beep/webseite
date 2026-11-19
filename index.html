@@ -93,9 +93,10 @@ section{padding-block:96px}
 .timeline h3{font-size:1.15rem}
 .timeline p{color:var(--muted);font-size:.95rem;line-height:1.5}
 .session{margin-top:72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:48px;align-items:start;background:var(--paper-2);padding:40px;border-radius:4px}
-.session ul{margin:0;padding:0;list-style:none;display:grid;gap:0}
+.session ol{margin:0;padding:0;list-style:none;display:grid;gap:0}
 .session li{display:flex;justify-content:space-between;gap:16px;padding-block:11px;border-bottom:1px solid var(--rule)}
 .session li:last-child{border-bottom:0}
+.session li span{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .session .hint{color:var(--muted);margin-top:12px;font-size:.98rem}
 
 /* Formate */
@@ -255,16 +256,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
       <div class="session">
         <div>
-          <h3>Ein Modul von innen</h3>
-          <p class="hint">Jedes Modul hat denselben Rahmen und feste Gruppenregeln. Das gibt Sicherheit, gerade den unruhigen und den stillen Kindern.</p>
+          <h3>So läuft ein Treffen ab</h3>
+          <p class="hint">Jedes Treffen dauert 90 Minuten und hat denselben Rahmen mit festen Gruppenregeln. Das gibt Sicherheit, gerade den unruhigen und den stillen Kindern.</p>
         </div>
-        <ul aria-label="Bausteine jedes Moduls">
-          <li>Ankommen und Begrüßungsritual</li>
-          <li>Rückblick: Was haben die Kinder seit dem letzten Mal erlebt?</li>
-          <li>Thema des Tages mit Übungen und Spielen</li>
-          <li>Rollenspiele mit klarer Anleitung und Rückmeldung aus der Gruppe</li>
-          <li>Punkte für die Gruppe und eine kleine Aufgabe für den Alltag</li>
-        </ul>
+        <ol aria-label="Ablauf eines Treffens mit Minuten">
+          <li>Ankommen und Begrüßungsritual <span>5 Min.</span></li>
+          <li>Warm-up <span>10 Min.</span></li>
+          <li>Erarbeitung und Hauptübung <span>60 Min.</span></li>
+          <li>Reflexion und Transfer in den Alltag <span>10 Min.</span></li>
+          <li>Entspannung und Abschlussritual <span>5 Min.</span></li>
+        </ol>
       </div>
     </div>
   </section>
