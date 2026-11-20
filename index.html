@@ -8,419 +8,267 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="fonts.css">
 <style>
-/* Layout: linksbündig wie ein Schulheft. Heftblau als Tinte, Textmarkergelb als einziger lauter Ton,
-   die Punktekarte aus dem Training als Leitmotiv. Keine Kartenraster, viel Weißraum. */
-:root{
-  --paper:#fbfbf8;
-  --paper-2:#eef0f7;
-  --ink:#1d2a6e;        /* Heftblau */
-  --ink-soft:#4a5384;
-  --text:#1b1f33;
-  --muted:#5b6078;
-  --rule:#cfd4e6;
-  --marker:#ffd84d;     /* Textmarker */
-  --stamp:#c2335f;      /* Stempelfarbe */
-  --band:#1d2a6e;
-  --band-text:#f3f4fb;
-  --band-muted:#b9bfe0;
-  --display:"Young Serif", Georgia, "Times New Roman", serif;
-  --body:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#11163a;--paper-2:#181f4d;--ink:#c9d0ff;--ink-soft:#a3abe0;--text:#eceefa;--muted:#a6abc9;
-  --rule:#2c3570;--marker:#ffd84d;--stamp:#ff6f97;--band:#0b0f2b;--band-text:#eceefa;--band-muted:#9aa1cf;color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#11163a;--paper-2:#181f4d;--ink:#c9d0ff;--ink-soft:#a3abe0;--text:#eceefa;--muted:#a6abc9;
-  --rule:#2c3570;--marker:#ffd84d;--stamp:#ff6f97;--band:#0b0f2b;--band-text:#eceefa;--band-muted:#9aa1cf;color-scheme:dark}
+/* Variante B, Farbflächen: jeder Abschnitt eine ruhige Farbfläche, kräftige serifenlose Überschriften, sehr wenig Text. Bewusst nur ein (helles) Farbschema. */
+:root{--blue:#1d2a6e;--blue2:#2a3a8f;--sky:#e8ecfb;--cream:#fff3cf;--yellow:#ffc933;--white:#ffffff;--text:#1b1f33;--muted:#545a75;--rule:#d4d9ec;
+--display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--serif:"Young Serif",Georgia,serif}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--white);color:var(--text);font-family:var(--body);font-size:18px;line-height:1.6}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+header{background:var(--blue);color:var(--white)}
+header .bar{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
+.mark{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--white);font-family:var(--serif);font-size:1.1rem}
+.mark svg{width:38px;height:38px}
+.navcta{font-weight:700;text-decoration:none;font-size:.95rem;background:var(--yellow);color:var(--blue);padding:9px 18px;border-radius:999px}
+.hero{background:var(--blue);color:var(--white)}
+.hero .wrap{padding-block:70px 110px;display:grid;gap:24px;justify-items:start}
+.kicker{color:#b9c1ec;font-weight:500}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,7vw,5.4rem);line-height:.98;letter-spacing:-.03em;max-width:11em}
+.lede{font-size:1.2rem;max-width:30em;opacity:.85}
+.btn{display:inline-block;margin-top:10px;background:var(--yellow);color:var(--blue);text-decoration:none;font-weight:700;padding:16px 30px;border-radius:999px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.s-who{background:var(--cream)}
+.s-how{background:var(--white)}
+.s-price{background:var(--sky)}
+.s-inst{background:var(--blue);color:var(--white)}
+.s-me{background:var(--white)}
+.s-contact{background:var(--yellow);color:var(--blue)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:56px;padding-block:100px}
+.split h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.025em;color:var(--blue);align-self:start}
+.s-inst h2{color:var(--yellow)}
+.col{display:grid;gap:26px;min-width:0}
+.big{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.35;font-weight:500}
+.col > p:not(.big):not(.fine){color:var(--muted);max-width:36em}
+.s-inst .col > p:not(.big){color:#c3c9ee}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.item{background:var(--white);border-radius:24px;padding:28px;display:grid;gap:10px;align-content:start}
+.item h3{font-size:1.4rem;font-weight:700;color:var(--blue);letter-spacing:-.01em}
+.item p{color:var(--muted)}
+.dot{width:40px;height:40px;border-radius:50%;background:var(--yellow)}
+.dot2{background:var(--blue)}
+.fine{color:var(--muted);font-size:.92rem}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:44px 1fr;column-gap:16px;align-items:center;background:var(--sky);border-radius:16px;padding:14px 18px}
+.flow li::before{content:counter(f);grid-row:1/span 2;width:40px;height:40px;border-radius:50%;background:var(--blue);color:var(--white);font-weight:700;display:grid;place-items:center}
+.flow li:nth-child(4){background:var(--cream)}
+.flow li:nth-child(4)::before{background:var(--yellow);color:var(--blue)}
+.flow b{color:var(--blue)}
+.flow span{color:var(--muted);font-size:.92rem;line-height:1.3}
+details{border-bottom:1px solid var(--rule)}
+.s-inst details{border-color:rgba(255,255,255,.2)}
+summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;color:var(--blue);display:flex;justify-content:space-between;gap:12px}
+.s-inst summary{color:var(--white)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";width:30px;height:30px;flex:none;border-radius:50%;background:var(--yellow);color:var(--blue);display:grid;place-items:center;font-size:1.2rem;line-height:1;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+.more{padding-bottom:20px;color:var(--muted);display:grid;gap:12px}
+.s-inst .more{color:#c3c9ee}
+.more ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.mins{list-style:none!important;padding:0!important;gap:0!important}
+.mins li{display:flex;justify-content:space-between;gap:16px;padding-block:9px;border-bottom:1px solid var(--rule);color:var(--text)}
+.mins span{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.price{background:var(--white);border-radius:24px;padding:26px 22px;display:grid;gap:6px;align-content:start}
+.price h3{font-weight:700;font-size:1.1rem;color:var(--blue)}
+.price p{color:var(--muted);font-size:.92rem;line-height:1.4;min-height:2.8em}
+.price b{font-size:clamp(1.9rem,3.4vw,2.4rem);font-weight:700;letter-spacing:-.02em;color:var(--blue);margin-top:10px;font-variant-numeric:tabular-nums}
+.price small{display:block;font-size:.85rem;font-weight:500;color:var(--muted);letter-spacing:0}
+.price:nth-child(3){background:var(--blue)}.price:nth-child(3) h3,.price:nth-child(3) b{color:var(--white)}.price:nth-child(3) p,.price:nth-child(3) small{color:#c3c9ee}
+.s-contact .wrap{padding-block:100px;display:grid;gap:18px;justify-items:start}
+.s-contact h2{font-weight:700;font-size:clamp(2.4rem,6vw,4.4rem);letter-spacing:-.03em;line-height:1}
+.s-contact .lede{opacity:1;color:var(--blue)}
+.contact{display:grid;gap:8px;margin-top:8px}
+.contact a{font-weight:700;font-size:clamp(1.3rem,3.4vw,2rem);word-break:break-word;text-underline-offset:6px}
+.contact span{font-size:1.1rem;font-weight:500}
+.contact small{opacity:.75;margin-left:8px}
+footer{background:var(--blue);color:#b9c1ec;font-size:.9rem}
+footer .wrap{padding-block:30px;display:grid;gap:4px}
+footer summary{color:#dfe3fb;font-weight:500;padding:8px 0}footer summary::after{width:24px;height:24px;font-size:1rem}
+footer details{border-color:rgba(255,255,255,.15)}
+footer .body{padding-bottom:16px}footer .body p{color:#b9c1ec}footer .body p+p{margin-top:8px}footer .body h4{margin:14px 0 4px;color:#fff}
+footer .body p[style]{color:#fff!important}
+.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.pre{opacity:0;transform:translateY(22px)}
+.reveal.pre.in{opacity:1;transform:none}
+@media (max-width:820px){.split{grid-template-columns:1fr;gap:24px;padding-block:72px}.pair,.prices{grid-template-columns:1fr}.price p{min-height:0}.hero .wrap{padding-block:48px 80px}}
 
-*{box-sizing:border-box}
-body{background:var(--paper);color:var(--text);font-family:var(--body);font-size:18px;line-height:1.6}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--ink);margin:0;text-wrap:balance}
-h1{font-size:clamp(2.5rem,6.4vw,5rem);line-height:1.02;letter-spacing:-.015em}
-h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.08;letter-spacing:-.01em}
-h3{font-size:1.35rem;line-height:1.25}
-p{margin:0}
-a{color:var(--ink)}
-:focus-visible{outline:3px solid var(--stamp);outline-offset:3px;border-radius:4px}
-.ph{font-style:normal;text-decoration:underline dashed var(--stamp);text-decoration-thickness:2px;text-underline-offset:4px}
-
-/* Kopf */
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:22px;flex-wrap:wrap}
-.mark{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.mark svg{width:44px;height:44px;flex:none}
-.mark span{font-family:var(--display);font-size:1.15rem;line-height:1.1}
-nav{display:flex;gap:26px;flex-wrap:wrap}
-nav a{text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem}
-nav a:hover{color:var(--ink)}
-
-/* Hero */
-.hero{overflow-x:clip}
-main{overflow-x:clip}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:56px;align-items:end;padding-block:56px 88px}
-.hero-text{display:grid;gap:28px;min-width:0}
-.hero-text .intro{font-size:1.2rem;color:var(--muted);max-width:34em}
-.actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;padding:15px 26px;border-radius:999px}
-.btn:hover{background:var(--stamp)}
-.link{font-weight:500;text-underline-offset:4px}
-/* Eckdaten */
-.keyfacts{margin:0;border-top:2px solid var(--ink);display:grid;min-width:0}
-.keyfacts div{display:grid;grid-template-columns:6.5em 1fr;gap:16px;padding-block:14px;border-bottom:1px solid var(--rule)}
-.keyfacts dt{color:var(--muted)}
-.keyfacts dd{margin:0;font-family:var(--display);font-size:1.25rem;color:var(--ink);line-height:1.3}
-
-section{padding-block:96px}
-.lead{display:grid;gap:18px;max-width:40em;margin-bottom:56px}
-.lead p{color:var(--muted);font-size:1.12rem}
-
-/* Für wen */
-.who{display:grid;grid-template-columns:1fr 1fr;gap:64px}
-.who-item{display:grid;gap:12px;align-content:start}
-.who-item p{color:var(--muted)}
-.who-item .tag{justify-self:start;font-size:.9rem;font-weight:700;color:#1d2a6e;background:var(--marker);padding:2px 10px;border-radius:3px;transform:rotate(-1.5deg)}
-.who-item:nth-child(2) .tag{transform:rotate(1.2deg)}
-.goals{margin-top:72px;border-top:2px solid var(--ink);display:grid;grid-template-columns:repeat(3,1fr)}
-.goals p{padding:22px 24px 22px 0;border-bottom:1px solid var(--rule);font-size:1.02rem}
-.aside{margin-top:36px;max-width:44em;color:var(--muted);font-size:.98rem}
-
-/* Ablauf als Zeitleiste */
-.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
-.timeline::before{content:"";position:absolute;left:0;right:0;top:21px;height:2px;background:var(--rule)}
-.timeline li{position:relative;padding-right:22px;display:grid;gap:10px;align-content:start;min-width:0}
-.timeline .n{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:2px solid var(--ink);color:var(--ink);font-family:var(--display);font-size:1.15rem;position:relative}
-.timeline li:nth-child(5) .n{background:var(--ink);color:var(--paper)}
-.timeline h3{font-size:1.15rem}
-.timeline p{color:var(--muted);font-size:.95rem;line-height:1.5}
-.session{margin-top:72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:48px;align-items:start;background:var(--paper-2);padding:40px;border-radius:4px}
-.session ol{margin:0;padding:0;list-style:none;display:grid;gap:0}
-.session li{display:flex;justify-content:space-between;gap:16px;padding-block:11px;border-bottom:1px solid var(--rule)}
-.session li:last-child{border-bottom:0}
-.session li span{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.session .hint{color:var(--muted);margin-top:12px;font-size:.98rem}
-
-/* Formate */
-.formats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:2px solid var(--ink)}
-.fmt{padding:36px 40px 8px 0;display:grid;gap:18px;align-content:start}
-.fmt + .fmt{padding-left:40px;border-left:1px solid var(--rule)}
-.fmt dl{margin:0;display:grid;grid-template-columns:7.5em 1fr;gap:12px 16px}
-.fmt dt{color:var(--muted)}
-.fmt dd{margin:0}
-
-/* Einrichtungen */
-.band{background:var(--band);color:var(--band-text)}
-.band h2,.band h3{color:var(--band-text)}
-.band .lead p{color:var(--band-muted)}
-.band-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
-.band ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:12px}
-.band li{padding-left:28px;position:relative;color:var(--band-text)}
-.band li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:14px;border-radius:50%;border:2px solid var(--marker)}
-.for{margin-top:64px;color:var(--band-muted);max-width:46em}
-.for strong{color:var(--marker);font-weight:500}
-
-/* Kosten */
-.prices{display:grid;gap:0;border-top:2px solid var(--ink);max-width:880px}
-.price{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:baseline;padding-block:26px;border-bottom:1px solid var(--rule)}
-.price h3{font-family:var(--body);font-weight:700;font-size:1.12rem;color:var(--text)}
-.price p{color:var(--muted);font-size:.96rem;margin-top:4px}
-.price b{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.5rem);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
-.price b small{font-family:var(--body);font-size:.9rem;color:var(--muted);margin-left:6px}
-
-/* Über mich */
-.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:72px;align-items:start}
-.about-head{display:grid;gap:24px;min-width:0}
-.about-text{display:grid;gap:22px;max-width:38em}
-.about-text p{color:var(--muted)}
-.about-text ul{margin:0;padding-left:1.1em;display:grid;gap:8px;color:var(--text)}
-.quote{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.3;color:var(--ink)}
-
-/* Kontakt */
-.contact{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:72px;align-items:start}
-.contact-list{display:grid;gap:0;border-top:2px solid var(--ink)}
-.contact-list div{display:grid;grid-template-columns:7em 1fr;gap:16px;padding-block:16px;border-bottom:1px solid var(--rule)}
-.contact-list span{color:var(--muted)}
-.contact-list b{font-weight:500;word-break:break-word;justify-self:start}
-
-/* Rechtliches */
-.legal{padding-block:64px;border-top:1px solid var(--rule);font-size:.95rem;color:var(--muted)}
-.legal .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:56px}
-.legal h2{font-size:1.6rem;margin-bottom:16px}
-.legal h3{font-family:var(--body);font-weight:700;font-size:1rem;color:var(--text);margin:22px 0 4px}
-.legal p{max-width:62ch}
-.legal p + p{margin-top:8px}
-@media (max-width:900px){.legal .wrap{grid-template-columns:1fr;gap:40px}}
-footer{border-top:1px solid var(--rule);color:var(--muted);font-size:.92rem}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:32px}
-
-@media (max-width:900px){
-  .hero .wrap,.who,.band-cols,.formats,.about,.contact,.session{grid-template-columns:1fr}
-  .goals{grid-template-columns:1fr 1fr}
-  .timeline{grid-template-columns:1fr;gap:28px}
-  .timeline::before{left:21px;right:auto;top:0;bottom:0;width:2px;height:auto}
-  .timeline li{grid-template-columns:44px 1fr;column-gap:18px;padding-right:0}
-  .timeline li > :not(.n){grid-column:2}
-  .timeline .n{grid-row:1 / span 2}
-  .fmt,.fmt + .fmt{padding:32px 0 8px;border-left:0}
-  .fmt + .fmt{border-top:1px solid var(--rule)}
-  nav{display:none}
-  section{padding-block:72px}
-  .session{padding:28px 20px}
-}
-@media (max-width:520px){.goals{grid-template-columns:1fr}.fmt dl,.contact-list div{grid-template-columns:1fr;gap:2px}.fmt dd{margin-bottom:8px}}
 </style>
 </head>
 <body>
 
-
 <header>
-  <div class="wrap">
-    <a class="mark" href="#start">
-      <svg viewBox="2 2 60 60" aria-hidden="true"><g transform="rotate(72.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.499999999999998 32 14.499999999999998 Q39 14.499999999999998 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(144.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.499999999999998 32 14.499999999999998 Q39 14.499999999999998 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(216.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.499999999999998 32 14.499999999999998 Q39 14.499999999999998 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(288.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.499999999999998 32 14.499999999999998 Q39 14.499999999999998 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(0.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="#ffc933"/><path d="M25 22.5 Q25 14.499999999999998 32 14.499999999999998 Q39 14.499999999999998 39 22.5 Z" fill="#ffc933"/></g></svg>
-      <span>Sozialkompetenz&shy;training<br><small style="font-family:var(--body);font-size:.8rem;color:var(--muted)">für Kinder der Klassen 3 bis 6</small></span>
-    </a>
-    <nav aria-label="Seitennavigation">
-      <a href="#fuer-wen">Für wen</a>
-      <a href="#ablauf">Ablauf</a>
-      <a href="#ueber-mich">Über mich</a>
-      <a href="#einrichtungen">Für Einrichtungen</a>
-      <a href="#kosten">Kosten</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
+  <div class="wrap bar">
+    <a class="mark" href="#start"><svg viewBox="2 2 60 60" aria-hidden="true"><g transform="rotate(72.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(144.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(216.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(288.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(0.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="#ffc933"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="#ffc933"/></g></svg><span>Sozialkompetenz&shy;training</span></a>
+    <a class="navcta" href="#kontakt">Kontakt</a>
   </div>
 </header>
 
 <main id="start">
-  <div class="hero">
+  <section class="hero">
     <div class="wrap">
-      <div class="hero-text">
-        <h1>Mutiger werden, ruhiger bleiben, besser miteinander klarkommen.</h1>
-        <p class="intro">Ein soziales Kompetenztraining für Kinder von 8 bis 12 Jahren, angelehnt an das bewährte Training von Petermann &amp; Petermann. Ich lerne jedes Kind vorher einzeln kennen und plane den Kurs für genau diese Gruppe.</p>
-        <div class="actions">
-          <a class="btn" href="#kontakt">Erstgespräch anfragen</a>
-          <a class="link" href="#einrichtungen">Informationen für Einrichtungen</a>
-        </div>
-      </div>
-      <dl class="keyfacts" aria-label="Das Wichtigste auf einen Blick">
-        <div><dt>Alter</dt><dd>8 bis 12 Jahre, Klasse 3 bis 6</dd></div>
-        <div><dt>Gruppe</dt><dd>4 bis 6 Kinder</dd></div>
-        <div><dt>Umfang</dt><dd>8 Module in 8 bis 10 Treffen à 90 Minuten</dd></div>
-        <div><dt>Eltern</dt><dd>Elternabend inklusive</dd></div>
-        <div><dt>Auch als</dt><dd>Einzeltraining</dd></div>
-      </dl>
-    </div>
-  </div>
-
-  <section id="fuer-wen">
-    <div class="wrap">
-      <div class="lead">
-        <h2>Für Kinder, die sich im Miteinander schwertun</h2>
-        <p>Das Training ist vorbeugend gedacht. Es hilft am besten, bevor sich Schwierigkeiten festsetzen.</p>
-      </div>
-      <div class="who">
-        <div class="who-item">
-          <span class="tag">eher still</span>
-          <h3>Kinder, die sich wenig zutrauen</h3>
-          <p>Sie melden sich kaum, finden schwer Anschluss oder können nicht Nein sagen. In der Gruppe üben sie in kleinen Schritten, sich zu zeigen und für sich einzustehen.</p>
-        </div>
-        <div class="who-item">
-          <span class="tag">eher laut</span>
-          <h3>Kinder, die schnell an Grenzen stoßen</h3>
-          <p>Sie werden schnell wütend, halten sich schwer an Regeln oder geraten oft in Streit. Sie lernen, ihre Wut früher zu bemerken und anders zu reagieren.</p>
-        </div>
-      </div>
-      <div class="goals">
-        <p>Gefühle erkennen und in Worte fassen</p>
-        <p>bei Wut und Frust ruhiger reagieren</p>
-        <p>sich in andere hineinversetzen</p>
-        <p>Kontakt aufnehmen, Nein sagen, um Hilfe bitten</p>
-        <p>Konflikte fair lösen und Regeln einhalten</p>
-        <p>eigene Stärken sehen und Lob annehmen</p>
-      </div>
-      <p class="aside">Das Training ist ein pädagogisches Angebot und keine Therapie. Braucht ein Kind eher eine therapeutische Behandlung, sprechen wir das im Erstgespräch offen an, und ich nenne Ihnen passende Stellen.</p>
+      <p class="kicker">Für Kinder von 8 bis 12 Jahren in Hamburg und Umgebung</p>
+      <h1>Mutiger werden. Ruhiger bleiben. Besser miteinander klarkommen.</h1>
+      <p class="lede">Soziales Kompetenztraining in kleinen Gruppen, angelehnt an Petermann &amp; Petermann.</p>
+      <a class="btn" href="#kontakt">Kostenloses Erstgespräch</a>
     </div>
   </section>
 
-  <section id="ablauf" style="padding-top:0">
-    <div class="wrap">
-      <div class="lead">
-        <h2>So läuft ein Kurs</h2>
-        <p>Die Reihenfolge ist immer gleich. Was in den Modulen geübt wird, hängt von den Kindern ab, die tatsächlich in der Gruppe sind.</p>
-      </div>
-      <ol class="timeline">
-        <li><span class="n">1</span><h3>Erstgespräch</h3><p>mit den Eltern, kostenfrei. Wir klären, ob das Angebot passt.</p></li>
-        <li><span class="n">2</span><h3>Kennenlernen</h3><p>Jedes Kind allein, etwa 30 Minuten, mit einer kurzen kindgerechten Befragung.</p></li>
-        <li><span class="n">3</span><h3>Planung</h3><p>Ich werte die Gespräche aus und lege die Schwerpunkte der Gruppe fest.</p></li>
-        <li><span class="n">4</span><h3>Elternabend</h3><p>Ziele, Ablauf und wie Sie Ihr Kind zu Hause unterstützen.</p></li>
-        <li><span class="n">5</span><h3>8 Module</h3><p>verteilt auf 8 bis 10 Treffen à 90 Minuten, je nachdem, wie viel Zeit die Gruppe braucht. Dazwischen gibt es kleine Aufgaben für den Alltag.</p></li>
-        <li><span class="n">6</span><h3>Abschluss</h3><p>Rückmeldung an die Eltern. Ein kurzer Bericht für die Einrichtung nur mit Einverständnis der Eltern.</p></li>
-      </ol>
-
-      <div class="session">
-        <div>
-          <h3>So läuft ein Treffen ab</h3>
-          <p class="hint">Jedes Treffen dauert 90 Minuten und hat denselben Rahmen mit festen Gruppenregeln. Das gibt Sicherheit, gerade den unruhigen und den stillen Kindern.</p>
+  <section class="s-who">
+    <div class="wrap split">
+      <h2>Für wen?</h2>
+      <div class="col">
+        <div class="pair">
+          <div class="item reveal"><span class="dot"></span><h3>Stille Kinder</h3><p>die sich wenig zutrauen, schwer Anschluss finden oder nicht Nein sagen können.</p></div>
+          <div class="item reveal"><span class="dot dot2"></span><h3>Laute Kinder</h3><p>die schnell wütend werden, sich schwer an Regeln halten oder oft in Streit geraten.</p></div>
         </div>
-        <ol aria-label="Ablauf eines Treffens mit Minuten">
-          <li>Ankommen und Begrüßungsritual <span>5 Min.</span></li>
-          <li>Warm-up <span>10 Min.</span></li>
-          <li>Erarbeitung und Hauptübung <span>60 Min.</span></li>
-          <li>Reflexion und Transfer in den Alltag <span>10 Min.</span></li>
-          <li>Entspannung und Abschlussritual <span>5 Min.</span></li>
+        <p class="fine">Ein pädagogisches Angebot, keine Therapie.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-how">
+    <div class="wrap split">
+      <h2>So läuft es</h2>
+      <div class="col">
+        <p class="big reveal">Ich lerne jedes Kind vorher einzeln kennen. Dann plane ich den Kurs für genau diese Gruppe.</p>
+        <ol class="flow reveal">
+          <li><b>Erstgespräch</b><span>mit den Eltern, kostenfrei</span></li>
+          <li><b>Kennenlernen</b><span>jedes Kind einzeln</span></li>
+          <li><b>Elternabend</b><span>Ziele und Ablauf</span></li>
+          <li><b>8 Module</b><span>in 8 bis 10 Treffen à 90 Min.</span></li>
+          <li><b>Abschluss</b><span>Rückmeldung an die Eltern</span></li>
         </ol>
+        <details>
+          <summary>Wie sieht ein Treffen aus?</summary>
+          <div class="more">
+            <ul class="mins">
+              <li>Ankommen und Begrüßungsritual<span>5 Min.</span></li>
+              <li>Warm-up<span>10 Min.</span></li>
+              <li>Erarbeitung und Hauptübung<span>60 Min.</span></li>
+              <li>Reflexion und Transfer in den Alltag<span>10 Min.</span></li>
+              <li>Entspannung und Abschlussritual<span>5 Min.</span></li>
+            </ul>
+            <p>Jedes Treffen hat denselben Rahmen mit festen Gruppenregeln. Das gibt Sicherheit, gerade den unruhigen und den stillen Kindern.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Woran arbeiten wir?</summary>
+          <div class="more"><p>Gefühle erkennen und benennen, bei Wut ruhiger reagieren, sich in andere hineinversetzen, Kontakt aufnehmen und Nein sagen, Konflikte fair lösen, eigene Stärken sehen. Die Schwerpunkte richten sich nach der Gruppe.</p></div>
+        </details>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section class="s-price">
+    <div class="wrap split">
+      <h2>Angebote</h2>
+      <div class="col">
+        <div class="prices">
+          <div class="price reveal"><h3>Gruppenkurs</h3><p>4 bis 6 Kinder, Material inklusive</p><b>300 €<small> pro Kind</small></b></div>
+          <div class="price reveal"><h3>Einzeltraining</h3><p>für Kinder, denen eine Gruppe noch zu viel ist</p><b>100 €<small> pro 90 Min.</small></b></div>
+          <div class="price reveal"><h3>Für Einrichtungen</h3><p>Kurspauschale, zzgl. 50 € Material</p><b>1.200 €<small> pro Kurs</small></b></div>
+        </div>
+        <details>
+          <summary>Was ist enthalten?</summary>
+          <div class="more"><p>Enthalten sind das Einzelkennenlernen der Kinder, der Elternabend, die Vor- und Nachbereitung sowie die Abschlussrückmeldung. Braucht eine Gruppe 10 statt 8 Treffen, bleibt der Preis gleich. Kurszeiten: samstags vormittags, montags 17:30 bis 19:30 Uhr oder freitags 16:30 bis 18:30 Uhr.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-inst" id="einrichtungen">
+    <div class="wrap split">
+      <h2>Für Einrichtungen</h2>
+      <div class="col">
+        <p class="big reveal">Sie stellen einen Raum. Ich bringe einen fertigen Kurs mit.</p>
+        <p class="reveal">Für Familienbildungsstätten, Elternschulen, Praxen, sozialpädiatrische Zentren und freie Träger. Auch als Überbrückung für Kinder auf einer Warteliste.</p>
+        <details>
+          <summary>Was übernehme ich, was brauche ich?</summary>
+          <div class="more"><p>Ich übernehme Kursleitung, Material, das Kennenlernen der Kinder, Anmelde- und Elternunterlagen, Elternabend und Abschlussrückmeldung. Von Ihnen brauche ich einen Gruppenraum für bis zu 6 Kinder, einen der drei Termine und je nach Modell Hilfe, die Familien zu erreichen.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-me">
+    <div class="wrap split">
+      <h2>Über mich</h2>
+      <div class="col">
+        <p class="big reveal">Jordan Schnöller, staatlich anerkannter Sozialarbeiter und Sozialpädagoge.</p>
+        <p class="reveal">Seit 2022 in der Schulsozialarbeit in Hamburg, qualifiziert für Soziales Kompetenztraining. Mir ist wichtig, dass Kinder in der Gruppe erleben: Ich werde gesehen, und ich kann etwas.</p>
+        <details>
+          <summary>Qualifikation</summary>
+          <div class="more"><ul>
+            <li>B.A. Soziale Arbeit, staatlich anerkannt</li>
+            <li>Ausbildung zum Sozialpädagogischen Assistenten</li>
+            <li>Qualifizierung „Soziales Kompetenztraining“, Beratungsstelle Gewaltprävention der Hamburger Behörde für Schule und Berufsbildung, 2024</li>
+            <li>viele geleitete Trainingsgruppen mit Grundschul- und Unterstufenkindern</li>
+          </ul><p>Die Kurse biete ich freiberuflich und unabhängig von meiner Stelle an.</p></div>
+        </details>
+        <details>
+          <summary>Schweigepflicht und Datenschutz</summary>
+          <div class="more"><p>Als staatlich anerkannter Sozialarbeiter unterliege ich der Schweigepflicht nach § 203 StGB. Informationen über Kinder und Familien gebe ich nur mit schriftlicher Einwilligung der Sorgeberechtigten weiter, auch an kooperierende Einrichtungen. Ausgenommen sind Fälle, in denen eine Gefahr für das Wohl eines Kindes oder einer anderen Person abgewendet werden muss (insbesondere § 4 KKG, § 34 StGB).</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-contact" id="kontakt">
     <div class="wrap">
-      <div class="lead">
-        <h2>In der Gruppe oder allein</h2>
-      </div>
-      <div class="formats">
-        <div class="fmt">
-          <h3>Gruppenkurs</h3>
-          <dl>
-            <dt>Gruppe</dt><dd>4 bis 6 Kinder</dd>
-            <dt>Umfang</dt><dd>Kennenlernen und 8 Module in 8 bis 10 Treffen à 90 Minuten</dd>
-            <dt>Termine</dt><dd>samstags vormittags, montags 17:30 bis 19:30 Uhr oder freitags 16:30 bis 18:30 Uhr</dd>
-            <dt>Eltern</dt><dd>Elternabend und Rückmeldung zum Schluss</dd>
-          </dl>
-        </div>
-        <div class="fmt">
-          <h3>Einzeltraining</h3>
-          <dl>
-            <dt>Für</dt><dd>ein Kind</dd>
-            <dt>Umfang</dt><dd>Erstgespräch und Einheiten à 90 Minuten</dd>
-            <dt>Termine</dt><dd>nach Absprache</dd>
-            <dt>Passt, wenn</dt><dd>eine Gruppe anfangs noch zu viel ist oder ein Kind sich auf einen Kurs vorbereiten möchte</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="ueber-mich" style="background:var(--paper-2)">
-    <div class="wrap about">
-      <div class="about-head">
-        <h2>Über mich</h2>
-        <p class="quote">„Kinder sollen in der Gruppe erleben: Ich werde gesehen, und ich kann etwas.“</p>
-      </div>
-      <div class="about-text">
-        <p>Ich heiße Jordan Schnöller, bin staatlich anerkannter Sozialarbeiter und Sozialpädagoge (B.A. Soziale Arbeit). Davor habe ich eine Ausbildung zum Sozialpädagogischen Assistenten gemacht. Seit 2022 arbeite ich in der Schulsozialarbeit in Hamburg, zuerst an einer Grundschule, inzwischen an einer weiterführenden Schule.</p>
-        <ul>
-          <li>Qualifizierung „Soziales Kompetenztraining“ (30 Stunden) bei der Beratungsstelle Gewaltprävention der Hamburger Behörde für Schule und Berufsbildung, 2024, mit begleiteter Praxis</li>
-          <li>viele geleitete Trainingsgruppen mit Kindern im Grundschul- und Unterstufenalter</li>
-          <li>enge Zusammenarbeit mit Eltern und Lehrkräften</li>
-        </ul>
-        <p>Die Kurse biete ich freiberuflich und unabhängig von meiner Stelle an.</p>
-        <h3 style="margin-top:12px">Schweigepflicht und Datenschutz</h3>
-        <p>Als staatlich anerkannter Sozialarbeiter unterliege ich der Schweigepflicht nach § 203 StGB. Informationen über Kinder und Familien gebe ich nur mit schriftlicher Einwilligung der Sorgeberechtigten weiter, auch an kooperierende Einrichtungen. Ausgenommen sind Fälle, in denen eine Gefahr für das Wohl eines Kindes oder einer anderen Person abgewendet werden muss (insbesondere § 4 KKG, § 34 StGB).</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="einrichtungen" class="band">
-    <div class="wrap">
-      <div class="lead">
-        <h2>Für Einrichtungen: ein fertiger Kurs für Ihr Programm</h2>
-        <p>Sie stellen einen Raum, ich bringe alles andere mit. Bei genug Nachfrage kann ich auch zwei Gruppen parallel anbieten.</p>
-      </div>
-      <div class="band-cols">
-        <div>
-          <h3>Das übernehme ich</h3>
-          <ul>
-            <li>Kursleitung und das komplette Material</li>
-            <li>Kennenlernen und Befragung jedes Kindes</li>
-            <li>Anmelde- und Elternunterlagen</li>
-            <li>Elternabend und Abschlussrückmeldung</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Das brauche ich von Ihnen</h3>
-          <ul>
-            <li>einen Gruppenraum für bis zu 6 Kinder</li>
-            <li>einen der drei möglichen Termine</li>
-            <li>je nach Modell Hilfe, die Familien zu erreichen, etwa über Ihr Programmheft oder Ihre Warteliste</li>
-          </ul>
-        </div>
-      </div>
-      <p class="for">Das Angebot passt zu <strong>Familienbildungsstätten</strong>, <strong>Elternschulen</strong>, <strong>kinder- und jugendpsychiatrischen Praxen</strong>, <strong>sozialpädiatrischen Zentren</strong> und <strong>freien Trägern der Jugendhilfe</strong>. Gerade für Kinder auf einer Warteliste kann es eine gute Überbrückung sein.</p>
-    </div>
-  </section>
-
-  <section id="kosten">
-    <div class="wrap">
-      <div class="lead">
-        <h2>Kosten</h2>
-        <p>Die Preise umfassen alle Leistungen, auch das Einzelkennenlernen der Kinder, den Elternabend sowie die Vor- und Nachbereitung. Weitere Kosten entstehen nicht. Das Erstgespräch ist immer kostenfrei.</p>
-      </div>
-      <div class="prices">
-        <div class="price">
-          <div><h3>Kurspauschale für Einrichtungen</h3><p>für eine Gruppe mit 4 bis 6 Kindern, 8 Module in 8 bis 10 Treffen, zuzüglich 50 € Material</p></div>
-          <b>1.200 €</b>
-        </div>
-        <div class="price">
-          <div><h3>Offener Kurs</h3><p>Eltern melden direkt an, 8 Module in 8 bis 10 Treffen, Material inklusive</p></div>
-          <b>300 €<small>pro Kind</small></b>
-        </div>
-        <div class="price">
-          <div><h3>Einzeltraining</h3><p>pro Einheit à 90 Minuten</p></div>
-          <b>100 €</b>
-        </div>
-      </div>
-      <p class="aside">Braucht eine Gruppe mehr Treffen, ändert sich der Preis nicht. Andere Modelle, zum Beispiel ein Honorar nach dem Satz Ihrer Einrichtung, besprechen wir gern.</p>
-    </div>
-  </section>
-
-  <section id="kontakt">
-    <div class="wrap contact">
-      <div class="lead" style="margin-bottom:0">
-        <h2>Schreiben Sie mir</h2>
-        <p>Ob Sie für Ihr Kind einen Platz suchen oder als Einrichtung einen Kurs planen: Ein paar Sätze reichen. Ich melde mich innerhalb von 24 Stunden.</p>
-        <p>Einrichtungen planen ihr Programm meist ein halbes Jahr im Voraus. Für Kurse im Frühjahr lohnt sich eine Anfrage schon im Winter.</p>
-      </div>
-      <div class="contact-list">
-        <div><span>Name</span><b>Jordan Schnöller</b></div>
-        <div><span>E-Mail</span><b><a href="mailto:kontakt@jordan-schnoeller.de">kontakt@jordan-schnoeller.de</a></b></div>
-        <div><span>Telefon</span><b>015679 825786<br><small style="color:var(--muted);font-weight:400">werktags ab 16:30 Uhr</small></b></div>
-        <div><span>Kursorte</span><b>Hamburg und Umgebung</b></div>
+      <h2>Schreiben Sie mir</h2>
+      <p class="lede">Ein paar Sätze reichen. Ich melde mich innerhalb von 24 Stunden.</p>
+      <div class="contact">
+        <a href="mailto:kontakt@jordan-schnoeller.de">kontakt@jordan-schnoeller.de</a>
+        <span>015679 825786 <small>werktags ab 16:30 Uhr</small></span>
       </div>
     </div>
   </section>
 </main>
 
-<div class="legal">
-  <div class="wrap">
-    <div id="impressum">
-      <h2>Impressum</h2>
-      <p>Angaben gemäß § 5 Digitale-Dienste-Gesetz</p>
-      <p style="color:var(--text)">Jordan Schnöller<br>c/o Autorenglück #84121<br>Albert-Einstein-Straße 47<br>02977 Hoyerswerda</p>
-      <h3>Kontakt</h3>
-      <p>Telefon: 015679 825786<br>E-Mail: kontakt@jordan-schnoeller.de</p>
-      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
-      <p>Jordan Schnöller, Anschrift wie oben</p>
-    </div>
-    <div id="datenschutz">
-      <h2>Datenschutz</h2>
-      <h3>Verantwortlich</h3>
-      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist Jordan Schnöller (Kontaktdaten im Impressum).</p>
-      <h3>Aufruf der Website</h3>
-      <p>Diese Website wird bei GitHub Pages (GitHub Inc., USA) gehostet. Beim Aufruf verarbeitet der Anbieter technisch notwendige Daten wie Ihre IP-Adresse, Datum und Uhrzeit sowie die aufgerufene Seite, um die Website auszuliefern und vor Missbrauch zu schützen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. GitHub ist unter dem EU-US Data Privacy Framework zertifiziert.</p>
-      <p>Die Website setzt keine Cookies, nutzt keine Analyse- oder Trackingdienste und lädt Schriften von meinem eigenen Server.</p>
-      <h3>Kontakt per E-Mail oder Telefon</h3>
-      <p>Wenn Sie mich kontaktieren, verwende ich Ihre Angaben nur, um Ihre Anfrage zu beantworten und ein mögliches Training zu planen (Art. 6 Abs. 1 lit. b DSGVO). Die Daten lösche ich, wenn sie dafür nicht mehr gebraucht werden und keine gesetzlichen Aufbewahrungsfristen bestehen.</p>
-      <h3>Ihre Rechte</h3>
-      <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Unabhängigen Landeszentrum für Datenschutz Schleswig-Holstein.</p>
-    </div>
-  </div>
-</div>
-
 <footer>
   <div class="wrap">
     <span>© 2026 Jordan Schnöller</span>
-    <span><a href="#impressum">Impressum</a> &nbsp; <a href="#datenschutz">Datenschutz</a></span>
+    <details id="impressum">
+      <summary>Impressum</summary>
+      <div class="body">
+        <p>Angaben gemäß § 5 Digitale-Dienste-Gesetz</p>
+        <p style="color:var(--text)">Jordan Schnöller<br>c/o Autorenglück #84121<br>Albert-Einstein-Straße 47<br>02977 Hoyerswerda</p>
+        <h4>Kontakt</h4>
+        <p>Telefon: 015679 825786<br>E-Mail: kontakt@jordan-schnoeller.de</p>
+        <h4>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h4>
+        <p>Jordan Schnöller, Anschrift wie oben</p>
+      </div>
+    </details>
+    <details id="datenschutz">
+      <summary>Datenschutz</summary>
+      <div class="body">
+        <h4>Verantwortlich</h4>
+        <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist Jordan Schnöller (Kontaktdaten im Impressum).</p>
+        <h4>Aufruf der Website</h4>
+        <p>Diese Website wird bei GitHub Pages (GitHub Inc., USA) gehostet. Beim Aufruf verarbeitet der Anbieter technisch notwendige Daten wie Ihre IP-Adresse, Datum und Uhrzeit sowie die aufgerufene Seite, um die Website auszuliefern und vor Missbrauch zu schützen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. GitHub ist unter dem EU-US Data Privacy Framework zertifiziert.</p>
+        <p>Die Website setzt keine Cookies, nutzt keine Analyse- oder Trackingdienste und lädt Schriften von meinem eigenen Server.</p>
+        <h4>Kontakt per E-Mail oder Telefon</h4>
+        <p>Wenn Sie mich kontaktieren, verwende ich Ihre Angaben nur, um Ihre Anfrage zu beantworten und ein mögliches Training zu planen (Art. 6 Abs. 1 lit. b DSGVO). Die Daten lösche ich, wenn sie dafür nicht mehr gebraucht werden und keine gesetzlichen Aufbewahrungsfristen bestehen.</p>
+        <h4>Ihre Rechte</h4>
+        <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Unabhängigen Landeszentrum für Datenschutz Schleswig-Holstein.</p>
+      </div>
+    </details>
   </div>
 </footer>
+
+<script>
+(function(){
+  // Abschnitte unterhalb des sichtbaren Bereichs blenden beim Scrollen sanft ein
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var els=[].slice.call(document.querySelectorAll('.reveal'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el,i){if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');el.style.transitionDelay=(i%3)*80+'ms';io.observe(el);}});
+  function openHash(){var h=location.hash.slice(1);if(h==='impressum'||h==='datenschutz')document.getElementById(h).open=true;}
+  addEventListener('hashchange',openHash);openHash();
+})();
+</script>
 
 </body>
 </html>
