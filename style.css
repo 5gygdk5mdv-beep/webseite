@@ -20,6 +20,7 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,7vw,5.4rem)
 .btn{display:inline-block;margin-top:10px;background:var(--yellow);color:var(--blue);text-decoration:none;font-weight:700;padding:16px 30px;border-radius:999px;transition:transform .2s}
 .btn:hover{transform:translateY(-2px)}
 .s-who{background:var(--cream)}
+.s-wait{background:var(--sky)}
 .s-how{background:var(--white)}
 .s-price{background:var(--sky)}
 .s-inst{background:var(--blue);color:var(--white)}
