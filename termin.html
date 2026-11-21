@@ -157,10 +157,20 @@
     alter.hidden=e;einr.hidden=!e;f.querySelector('#f-alter').disabled=e;f.querySelector('#f-einr').disabled=!e;
   });});
   f.querySelector('#f-einr').disabled=true;
+  // Entwurf merken: übersteht ein Neuladen, wird beim Schließen des Tabs und nach dem Absenden gelöscht
+  var KEY='anfrage-entwurf',SKIP=['access_key','subject','from_name','botcheck'];
+  function save(){try{var d={};f.querySelectorAll('input[name],select[name],textarea[name]').forEach(function(el){
+    if(SKIP.indexOf(el.name)>-1)return;if(el.type==='radio'){if(el.checked)d[el.name]=el.value;}else d[el.name]=el.value;});
+    sessionStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
+  try{var d=JSON.parse(sessionStorage.getItem(KEY)||'null');if(d){
+    f.querySelectorAll('input[name],select[name],textarea[name]').forEach(function(el){
+      if(!(el.name in d)||SKIP.indexOf(el.name)>-1)return;
+      if(el.type==='radio'){el.checked=(el.value===d[el.name]);if(el.checked)el.dispatchEvent(new Event('change'));}else el.value=d[el.name];});}}catch(e){}
+  f.addEventListener('input',save);f.addEventListener('change',save);
   f.addEventListener('submit',function(ev){
     ev.preventDefault();err.hidden=true;
     var b=f.querySelector('button');b.disabled=true;b.textContent='Wird gesendet …';
-    function ok(){f.hidden=true;done.hidden=false;done.focus();}
+    function ok(){try{sessionStorage.removeItem(KEY);}catch(e){}f.hidden=true;done.hidden=false;done.focus();}
     function fail(){err.hidden=false;b.disabled=false;b.textContent='Anfrage senden';}
     if(f.access_key.value==='WEB3FORMS-SCHLUESSEL'){fail();return;} // noch kein Schlüssel: auf direkte E-Mail verweisen
     fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
