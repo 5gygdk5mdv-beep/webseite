@@ -51,101 +51,14 @@
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="fonts.css">
-<style>
-/* Variante B, Farbflächen: jeder Abschnitt eine ruhige Farbfläche, kräftige serifenlose Überschriften, sehr wenig Text. Bewusst nur ein (helles) Farbschema. */
-:root{--blue:#1d2a6e;--blue2:#2a3a8f;--sky:#e8ecfb;--cream:#fff3cf;--yellow:#ffc933;--white:#ffffff;--text:#1b1f33;--muted:#545a75;--rule:#d4d9ec;
---display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;--serif:"Young Serif",Georgia,serif}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;background:var(--white);color:var(--text);font-family:var(--body);font-size:18px;line-height:1.6}
-.wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{margin:0;text-wrap:balance}
-p{margin:0}a{color:inherit}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
-header{background:var(--blue);color:var(--white)}
-header .bar{display:flex;justify-content:space-between;align-items:center;padding-block:20px}
-.mark{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--white);font-family:var(--serif);font-size:1.1rem}
-.mark svg{width:38px;height:38px}
-.navcta{font-weight:700;text-decoration:none;font-size:.95rem;background:var(--yellow);color:var(--blue);padding:9px 18px;border-radius:999px}
-.hero{background:var(--blue);color:var(--white)}
-.hero .wrap{padding-block:70px 110px;display:grid;gap:24px;justify-items:start}
-.kicker{color:#b9c1ec;font-weight:500}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,7vw,5.4rem);line-height:.98;letter-spacing:-.03em;max-width:11em}
-.lede{font-size:1.2rem;max-width:30em;opacity:.85}
-.btn{display:inline-block;margin-top:10px;background:var(--yellow);color:var(--blue);text-decoration:none;font-weight:700;padding:16px 30px;border-radius:999px;transition:transform .2s}
-.btn:hover{transform:translateY(-2px)}
-.s-who{background:var(--cream)}
-.s-how{background:var(--white)}
-.s-price{background:var(--sky)}
-.s-inst{background:var(--blue);color:var(--white)}
-.s-me{background:var(--white)}
-.s-contact{background:var(--yellow);color:var(--blue)}
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:56px;padding-block:100px}
-.split h2{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.025em;color:var(--blue);align-self:start}
-.s-inst h2{color:var(--yellow)}
-.col{display:grid;gap:26px;min-width:0}
-.big{font-size:clamp(1.35rem,2.4vw,1.75rem);line-height:1.35;font-weight:500}
-.col > p:not(.big):not(.fine){color:var(--muted);max-width:36em}
-.s-inst .col > p:not(.big){color:#c3c9ee}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.item{background:var(--white);border-radius:24px;padding:28px;display:grid;gap:10px;align-content:start}
-.item h3{font-size:1.4rem;font-weight:700;color:var(--blue);letter-spacing:-.01em}
-.item p{color:var(--muted)}
-.dot{width:40px;height:40px;border-radius:50%;background:var(--yellow)}
-.dot2{background:var(--blue)}
-.fine{color:var(--muted);font-size:.92rem}
-.flow{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:f}
-.flow li{counter-increment:f;display:grid;grid-template-columns:44px 1fr;column-gap:16px;align-items:center;background:var(--sky);border-radius:16px;padding:14px 18px}
-.flow li::before{content:counter(f);grid-row:1/span 2;width:40px;height:40px;border-radius:50%;background:var(--blue);color:var(--white);font-weight:700;display:grid;place-items:center}
-.flow li:nth-child(4){background:var(--cream)}
-.flow li:nth-child(4)::before{background:var(--yellow);color:var(--blue)}
-.flow b{color:var(--blue)}
-.flow span{color:var(--muted);font-size:.92rem;line-height:1.3}
-details{border-bottom:1px solid var(--rule)}
-.s-inst details{border-color:rgba(255,255,255,.2)}
-summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;color:var(--blue);display:flex;justify-content:space-between;gap:12px}
-.s-inst summary{color:var(--white)}
-summary::-webkit-details-marker{display:none}
-summary::after{content:"+";width:30px;height:30px;flex:none;border-radius:50%;background:var(--yellow);color:var(--blue);display:grid;place-items:center;font-size:1.2rem;line-height:1;transition:transform .25s}
-details[open] summary::after{transform:rotate(45deg)}
-.more{padding-bottom:20px;color:var(--muted);display:grid;gap:12px}
-.s-inst .more{color:#c3c9ee}
-.more ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
-.mins{list-style:none!important;padding:0!important;gap:0!important}
-.mins li{display:flex;justify-content:space-between;gap:16px;padding-block:9px;border-bottom:1px solid var(--rule);color:var(--text)}
-.mins span{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.prices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.price{background:var(--white);border-radius:24px;padding:26px 22px;display:grid;gap:6px;align-content:start}
-.price h3{font-weight:700;font-size:1.1rem;color:var(--blue)}
-.price p{color:var(--muted);font-size:.92rem;line-height:1.4;min-height:2.8em}
-.price b{font-size:clamp(1.9rem,3.4vw,2.4rem);font-weight:700;letter-spacing:-.02em;color:var(--blue);margin-top:10px;font-variant-numeric:tabular-nums}
-.price small{display:block;font-size:.85rem;font-weight:500;color:var(--muted);letter-spacing:0}
-.price:nth-child(3){background:var(--blue)}.price:nth-child(3) h3,.price:nth-child(3) b{color:var(--white)}.price:nth-child(3) p,.price:nth-child(3) small{color:#c3c9ee}
-.s-contact .wrap{padding-block:100px;display:grid;gap:18px;justify-items:start}
-.s-contact h2{font-weight:700;font-size:clamp(2.4rem,6vw,4.4rem);letter-spacing:-.03em;line-height:1}
-.s-contact .lede{opacity:1;color:var(--blue)}
-.contact{display:grid;gap:8px;margin-top:8px}
-.contact a{font-weight:700;font-size:clamp(1.3rem,3.4vw,2rem);word-break:break-word;text-underline-offset:6px}
-.contact span{font-size:1.1rem;font-weight:500}
-.contact small{opacity:.75;margin-left:8px}
-footer{background:var(--blue);color:#b9c1ec;font-size:.9rem}
-footer .wrap{padding-block:30px;display:grid;gap:4px}
-footer summary{color:#dfe3fb;font-weight:500;padding:8px 0}footer summary::after{width:24px;height:24px;font-size:1rem}
-footer details{border-color:rgba(255,255,255,.15)}
-footer .body{padding-bottom:16px}footer .body p{color:#b9c1ec}footer .body p+p{margin-top:8px}footer .body h4{margin:14px 0 4px;color:#fff}
-footer .body p[style]{color:#fff!important}
-.reveal{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-.reveal.pre{opacity:0;transform:translateY(22px)}
-.reveal.pre.in{opacity:1;transform:none}
-@media (max-width:820px){.split{grid-template-columns:1fr;gap:24px;padding-block:72px}.pair,.prices{grid-template-columns:1fr}.price p{min-height:0}.hero .wrap{padding-block:48px 80px}}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
     <a class="mark" href="#start"><svg viewBox="2 2 60 60" aria-hidden="true"><g transform="rotate(72.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(144.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(216.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(288.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="currentColor"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="currentColor"/></g><g transform="rotate(0.0 32 32)"><circle cx="32" cy="8.6" r="4.3" fill="#ffc933"/><path d="M25 22.5 Q25 14.5 32 14.5 Q39 14.5 39 22.5 Z" fill="#ffc933"/></g></svg><span>Sozialkompetenz&shy;training</span></a>
-    <a class="navcta" href="#kontakt">Kontakt</a>
+    <nav class="nav" aria-label="Hauptmenü"><a href="unterlagen.html">Unterlagen</a><a class="navcta" href="termin.html">Termin anfragen</a></nav>
   </div>
 </header>
 
@@ -155,7 +68,7 @@ footer .body p[style]{color:#fff!important}
       <p class="kicker">Für Kinder von 8 bis 12 Jahren in Hamburg und Umgebung</p>
       <h1>Mutiger werden. Ruhiger bleiben. Besser miteinander klarkommen.</h1>
       <p class="lede">Soziales Kompetenztraining in kleinen Gruppen, angelehnt an Petermann &amp; Petermann.</p>
-      <a class="btn" href="#kontakt">Kostenloses Erstgespräch</a>
+      <a class="btn" href="termin.html">Kostenloses Erstgespräch</a>
     </div>
   </section>
 
@@ -267,6 +180,7 @@ footer .body p[style]{color:#fff!important}
         <a href="mailto:kontakt@jordan-schnoeller.de">kontakt@jordan-schnoeller.de</a>
         <span>015679 825786 <small>werktags ab 16:30 Uhr</small></span>
       </div>
+      <a class="btn" href="termin.html" style="background:var(--blue);color:var(--white)">Zum Anfrageformular</a>
     </div>
   </section>
 </main>
@@ -295,6 +209,9 @@ footer .body p[style]{color:#fff!important}
         <p>Die Website setzt keine Cookies, nutzt keine Analyse- oder Trackingdienste und lädt Schriften von meinem eigenen Server.</p>
         <h4>Kontakt per E-Mail oder Telefon</h4>
         <p>Wenn Sie mich kontaktieren, verwende ich Ihre Angaben nur, um Ihre Anfrage zu beantworten und ein mögliches Training zu planen (Art. 6 Abs. 1 lit. b DSGVO). Die Daten lösche ich, wenn sie dafür nicht mehr gebraucht werden und keine gesetzlichen Aufbewahrungsfristen bestehen.</p>
+        <h4>Anfrageformular</h4>
+        <p>Wenn Sie das Anfrageformular nutzen, werden Ihre Angaben über den Dienst Web3Forms an mein E-Mail-Postfach weitergeleitet. Web3Forms verarbeitet die Daten dabei nur, um sie zuzustellen. Der Anbieter sitzt außerhalb der EU, deshalb kann eine Übermittlung in ein Drittland stattfinden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, weil Sie mit der Anfrage ein mögliches Training anbahnen. Wenn Sie das nicht möchten, schreiben Sie mir einfach direkt eine E-Mail oder rufen Sie an.</p>
+        <p>Mein E-Mail-Postfach liegt bei Apple iCloud (Apple Distribution International Ltd., Irland).</p>
         <h4>Ihre Rechte</h4>
         <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Unabhängigen Landeszentrum für Datenschutz Schleswig-Holstein.</p>
       </div>
