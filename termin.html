@@ -162,7 +162,7 @@
     var b=f.querySelector('button');b.disabled=true;b.textContent='Wird gesendet …';
     function ok(){f.hidden=true;done.hidden=false;done.focus();}
     function fail(){err.hidden=false;b.disabled=false;b.textContent='Anfrage senden';}
-    if(f.access_key.value==='WEB3FORMS-SCHLUESSEL'){setTimeout(ok,600);return;} // Vorschau ohne Schlüssel: nichts wird gesendet
+    if(f.access_key.value==='WEB3FORMS-SCHLUESSEL'){fail();return;} // noch kein Schlüssel: auf direkte E-Mail verweisen
     fetch(f.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
       .then(function(r){return r.json();}).then(function(d){d.success?ok():fail();}).catch(fail);
   });
